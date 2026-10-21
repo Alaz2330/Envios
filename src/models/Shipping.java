@@ -5,10 +5,21 @@ public abstract class Shipping {
     private String idShipping;
     private double weight;
     private double distance;
-    private double tariffBasedPerKm;
-    private double chargePerKg;
+    private double tariff;
+    private double charge;
+
+    public Shipping(String client, String idShString, double weight, double distance, double tariff, double charge) {
+        this.client = client;
+        this.idShipping = idShString;
+        this.weight = weight;
+        this.distance = distance;
+        this.tariff = tariff;
+        this.charge = charge;
+    }
     
-    public abstract double calculateTariff(); 
+    public double calculateTariff() {
+        return (this.distance * this.tariff) + (this.weight * this.charge);
+    }; 
     
     public String getClient() {
         return client;
@@ -21,13 +32,5 @@ public abstract class Shipping {
     }
     public double getDistance() {
         return distance;
-    }
-    
-    public double getTariffBasedPerKm() {
-        return tariffBasedPerKm;
-    }
-
-    public double getChargePerKg() {
-        return chargePerKg;
     }
 }
