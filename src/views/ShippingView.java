@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -20,7 +21,11 @@ import javax.swing.WindowConstants;
 import models.ShippingType;
 
 public class ShippingView extends JFrame {
-    
+
+    private JComboBox cmbShippingType;
+    private JTextField txtShippingId, txtClient, txtDistance, txtWeight;
+    JButton btnSave;
+
     public ShippingView() {
         setSize(600, 400);
         setTitle("Shippings");
@@ -53,7 +58,7 @@ public class ShippingView extends JFrame {
         lblShippingId.setBounds(10, 10, 100, 25);
         pnlShippings.add(lblShippingId);
 
-        JTextField txtShippingId = new JTextField();
+        txtShippingId = new JTextField();
         txtShippingId.setBounds(110, 10, 100, 25);
         pnlShippings.add(txtShippingId);
 
@@ -61,7 +66,7 @@ public class ShippingView extends JFrame {
         lblShippingType.setBounds(220, 10, 100, 25);
         pnlShippings.add(lblShippingType);
 
-        JComboBox cmbShippingType = new JComboBox();
+        cmbShippingType = new JComboBox();
         cmbShippingType.setBounds(320, 10, 100, 25);
 
         DefaultComboBoxModel mdlShippingType = new DefaultComboBoxModel(ShippingType.values());
@@ -72,7 +77,7 @@ public class ShippingView extends JFrame {
         lblClient.setBounds(10, 45, 100, 25);
         pnlShippings.add(lblClient);
 
-        JTextField txtClient = new JTextField();
+        txtClient = new JTextField();
         txtClient.setBounds(110, 45, 100, 25);
         pnlShippings.add(txtClient);
 
@@ -80,7 +85,7 @@ public class ShippingView extends JFrame {
         lblDistance.setBounds(220, 45, 100, 25);
         pnlShippings.add(lblDistance);
 
-        JTextField txtDistance = new JTextField();
+        txtDistance = new JTextField();
         txtDistance.setBounds(320, 45, 100, 25);
         pnlShippings.add(txtDistance);
 
@@ -88,11 +93,11 @@ public class ShippingView extends JFrame {
         lblWeight.setBounds(10, 80, 100, 25);
         pnlShippings.add(lblWeight);
 
-        JTextField txtWeight = new JTextField();
+        txtWeight = new JTextField();
         txtWeight.setBounds(110, 80, 100, 25);
         pnlShippings.add(txtWeight);
 
-        JButton btnSave = new JButton("Save");
+        btnSave = new JButton("Save");
         btnSave.setBounds(220, 80, 100, 25);
         pnlShippings.add(btnSave);
 
@@ -103,8 +108,39 @@ public class ShippingView extends JFrame {
         JTable tblShippings = new JTable();
         JScrollPane spShippingList = new JScrollPane(tblShippings);
         
-
         add(pnlShippings);
-        
+        add(spShippingList);
+    }
+
+    public String getIdNumber() {
+        return txtShippingId.getText();
+    }
+
+    public ShippingType getShippingTypeSelected() {
+        return (ShippingType) cmbShippingType.getSelectedItem();
+    }
+
+    public String getClientName() {
+        return txtClient.getText();
+    }
+
+    public double getDistance() {
+        try{
+            return Double.parseDouble(txtDistance.getText());
+        } catch (Exception ex) {
+            return 0;
+        }
+    } 
+    
+    public double getWeight() {
+        try{
+            return Double.parseDouble(txtWeight.getText());
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
+    public void setSaveClick(ActionListener actionListener) {
+        btnSave.addActionListener(actionListener);
     }
 }

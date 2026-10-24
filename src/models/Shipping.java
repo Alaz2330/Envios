@@ -2,30 +2,24 @@ package models;
 
 public abstract class Shipping {
     private String client;
-    private String idShipping;
+    private String ShippingId;
     private double weight;
     private double distance;
-    private double tariff;
-    private double charge;
 
-    public Shipping(String client, String idShString, double weight, double distance, double tariff, double charge) {
+    public Shipping(String client, String shippingId, double weight, double distance) {
         this.client = client;
-        this.idShipping = idShString;
+        this.ShippingId = shippingId;
         this.weight = weight;
         this.distance = distance;
-        this.tariff = tariff;
-        this.charge = charge;
     }
     
-    public double calculateTariff() {
-        return (this.distance * this.tariff) + (this.weight * this.charge);
-    }; 
+    public abstract double calculateTariff(double weight, double distance); 
     
     public String getClient() {
         return client;
     }
     public String getidShipping() {
-        return idShipping;
+        return ShippingId;
     }
     public double getWeight() {
         return weight;
