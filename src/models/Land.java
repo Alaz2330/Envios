@@ -1,5 +1,7 @@
 package models;
 
+import java.text.DecimalFormat;
+
 public class Land extends Shipping {
     private static final double TARIFF = 1500;
     private static final double CHARGE = 2000;
@@ -12,4 +14,20 @@ public class Land extends Shipping {
     public double calculateTariff(double weight, double distance) {
         return weight * CHARGE + distance * TARIFF;
     }
+
+    @Override 
+    public String[] getData() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        double weight = getWeight();
+        double distance = getDistance();
+    
+        return new String[] {
+            "LAND",
+            getidShipping(),
+            getClient(),
+            df.format(weight),
+            df.format(distance),
+            df.format(calculateTariff(weight, distance))
+        };
+    };    
 }

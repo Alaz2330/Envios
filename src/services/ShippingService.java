@@ -5,6 +5,7 @@ import java.util.List;
 
 import factory.ShippingFactory;
 import models.Shipping;
+import models.ShippingData;
 import models.ShippingType;
 
 public class ShippingService {
@@ -31,7 +32,16 @@ public class ShippingService {
     }
 
     public static String[][] getData() {
-        
-        return data;
+        String[][] shippingData = new String[shippings.size()][headers.length];
+        int row = 0;
+        for (Shipping shipping : shippings) {
+            int column = 0;
+            for (var data : shipping.getData()) {
+                shippingData[row][column] = data; 
+                column++;
+            }
+            row++;
+        }
+        return shippingData;
     }
 }

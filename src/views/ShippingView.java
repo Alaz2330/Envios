@@ -11,12 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 import models.ShippingType;
 
@@ -24,7 +26,8 @@ public class ShippingView extends JFrame {
 
     private JComboBox cmbShippingType;
     private JTextField txtShippingId, txtClient, txtDistance, txtWeight;
-    JButton btnSave;
+    private JButton btnSave, btnRemoveShipping;
+    private JTable tblShippings;
 
     public ShippingView() {
         setSize(600, 400);
@@ -43,11 +46,10 @@ public class ShippingView extends JFrame {
         //});
         tbSuperiorButtons.add(btnAddShipping);
 
-        JButton btnRemoveShipping = new JButton();
+        btnRemoveShipping = new JButton();
         btnRemoveShipping.setIcon(new ImageIcon(getClass().getResource("/icons/remove_shipping.png")));
         btnRemoveShipping.setToolTipText("Remove Shipping");
         tbSuperiorButtons.add(btnRemoveShipping);
-
         add(tbSuperiorButtons);
 
         JPanel pnlShippings = new JPanel();
@@ -105,7 +107,7 @@ public class ShippingView extends JFrame {
         btnCancel.setBounds(220, 80, 100, 25);
         pnlShippings.add(btnCancel);
 
-        JTable tblShippings = new JTable();
+        tblShippings = new JTable();
         JScrollPane spShippingList = new JScrollPane(tblShippings);
         
         add(pnlShippings);
@@ -143,4 +145,19 @@ public class ShippingView extends JFrame {
     public void setSaveClick(ActionListener actionListener) {
         btnSave.addActionListener(actionListener);
     }
+
+    public void showShippings(String[][] data, String[] headers) {
+        DefaultTableModel dtm = new DefaultTableModel(data, headers);
+        tblShippings.setModel(dtm);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    public boolean confirm(String message) {
+        return JOptionPane.showConfirmDialog(null, message, "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    
 }

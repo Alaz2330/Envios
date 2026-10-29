@@ -10,6 +10,7 @@ public class ShippingController{
     public ShippingController(ShippingView view) {
         this.view = view;
         this.view.setSaveClick(event -> saveShipping());
+        showShippings();
     }
 
     private void saveShipping() {
@@ -19,5 +20,9 @@ public class ShippingController{
         var weight = view.getWeight();
         var distance = view.getDistance();
         ShippingService.add(type, client, shippingId, weight, distance);
+    }
+
+    private void showShippings() {
+        view.showShippings(ShippingService.getData(), ShippingService.getHeaders());
     }
 }

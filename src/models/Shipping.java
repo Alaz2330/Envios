@@ -1,5 +1,7 @@
 package models;
 
+import java.text.DecimalFormat;
+
 public abstract class Shipping {
     private String client;
     private String ShippingId;
@@ -27,4 +29,6 @@ public abstract class Shipping {
     public double getDistance() {
         return distance;
     }
+
+    public abstract String[] getData();
 }
