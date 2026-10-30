@@ -8,11 +8,11 @@ import models.Sea;
 
 public class ShippingFactory{
     
-    public static Shipping createShipping(ShippingType type, String client, String shippingId, double weight, double distance) {
+    public static Shipping createShipping(ShippingType type, String shippingId, String client, double weight, double distance) {
         return switch (type) {
-            case AIR -> new Air(client, shippingId, weight, distance);
-            case LAND -> new Land(client, shippingId, weight, distance);
-            case SEA -> new Sea(client, shippingId, weight, distance);
+            case AEREO -> new Air(shippingId, client, weight, distance);
+            case TERRESTRE -> new Land(shippingId, client, weight, distance);
+            case MAIRITIMO -> new Sea(shippingId, client, weight, distance);
         };
     }
 }

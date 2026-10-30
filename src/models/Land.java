@@ -11,23 +11,24 @@ public class Land extends Shipping {
     }
 
     @Override
-    public double calculateTariff(double weight, double distance) {
-        return weight * CHARGE + distance * TARIFF;
+    public double calculateTariff() {
+        return getWeight() * CHARGE + getDistance() * TARIFF;
     }
 
     @Override 
     public String[] getData() {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
+        DecimalFormat money = new DecimalFormat("#,##0.00");
+        DecimalFormat metric = new DecimalFormat("#,##0");
         double weight = getWeight();
         double distance = getDistance();
     
         return new String[] {
-            "LAND",
+            "TERRESTRE",
             getidShipping(),
             getClient(),
-            df.format(weight),
-            df.format(distance),
-            df.format(calculateTariff(weight, distance))
+            metric.format(weight),
+            metric.format(distance),
+            money.format(calculateTariff())
         };
     };    
 }

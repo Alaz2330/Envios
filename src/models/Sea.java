@@ -11,8 +11,8 @@ public class Sea extends Shipping {
     }
     
     @Override
-    public double calculateTariff(double weight, double distance) {
-        return weight * CHARGE + distance * TARIFF;
+    public double calculateTariff() {
+        return getWeight() * CHARGE + getDistance() * TARIFF;
     }
 
     @Override 
@@ -22,12 +22,12 @@ public class Sea extends Shipping {
         double distance = getDistance();
     
         return new String[] {
-            "SEA",
+            "MARITIMO",
             getidShipping(),
             getClient(),
-            df.format(weight),
             df.format(distance),
-            df.format(calculateTariff(weight, distance))
+            df.format(weight),
+            df.format(calculateTariff())
         };
     };  
 }

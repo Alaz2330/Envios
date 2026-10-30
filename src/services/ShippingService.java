@@ -5,12 +5,11 @@ import java.util.List;
 
 import factory.ShippingFactory;
 import models.Shipping;
-import models.ShippingData;
 import models.ShippingType;
 
 public class ShippingService {
     
-    private static String[] headers = {"Type", "Shipping ID", "Client", "Distance", "Weight", "Charge"};
+    private static String[] headers = {"Tipo", "Codigo ID", "Cliente", "Peso (Kg)", "Distancia (Km)", "Costo"};
 
     private static List<Shipping> shippings = new ArrayList<>();
 
@@ -25,8 +24,8 @@ public class ShippingService {
         return null;
     }
 
-    public static void add(ShippingType type, String shippingId, String client, double distance, double weight) {
-        var shipping = ShippingFactory.createShipping(type, shippingId, client, distance, weight);
+    public static void add(ShippingType type, String shippingId, String client, double weight, double distance) {
+        var shipping = ShippingFactory.createShipping(type, shippingId, client, weight, distance);
         if(shipping != null) 
             shippings.add(shipping);
     }
@@ -43,5 +42,9 @@ public class ShippingService {
             row++;
         }
         return shippingData;
+    }
+
+    public static boolean removeShippingById(String shippingId) {
+        return shippings.removeIf(shipping -> shipping.getidShipping().equals(shippingId));
     }
 }
